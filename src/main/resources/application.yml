@@ -1,0 +1,19 @@
+server:
+    port: 8081
+
+spring:
+    application:
+        name: ai-agent-backend    
+
+
+    ai:
+     openai:
+        api-key: ${OPENAI_API_KEY}
+        chat:
+          model: ${CHAT_MODEL:gpt-4o-mini}
+
+
+    # api-key: ${OPENAI_API_KEY:default-key}
+# 
+
+                # base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}    
