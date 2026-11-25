@@ -18,19 +18,27 @@ private final Map<String, String> orders = Map.of(
 
 @Tool(description = "Get the status of an customer order by its order ID")
 public String getOrderStatus(String orderId) {
+    System.out.println("Calling getOrderStatus tools");
+    System.out.println("Fetching order status for order ID: " + orderId);
     return orders.getOrDefault(orderId, "Order not found");
 }
 
 @Tool(description = "Cancel a customer order by its order ID")
 public String cancelOrder(String orderId) {
+    System.out.println("Calling cancelOrder tools");
+    System.out.println("Attempting to cancel order with ID: " + orderId);
     if(orders.containsKey(orderId)) {
         return "Order " + orderId + "has been cancelled.";
     } else {
         return "Order not found";
     }
-
 }
 
-        
+@Tool(description= "Get the total count of customer orders")
+public Integer getOrderCount() {
+  System.out.println("Calling getOrderCount tool");
+    return orders.size();
+    }
+
     
 }

@@ -8,12 +8,16 @@ spring:
 
     ai:
      openai:
-        api-key: ${OPENAI_API_KEY}
-        chat:
-          model: ${CHAT_MODEL:gpt-4o-mini}
+        api-key: ${GROQ_API_KEY}
 
 
     # api-key: ${OPENAI_API_KEY:default-key}
-# 
+# #spring.ai.openai.api-key=${GROQ_API_KEY}
 
                 # base-url: ${OPENAI_BASE_URL:https://api.openai.com/v1}    
+
+    #  ai:
+    #  openai:
+    #     api-key: ${OPENAI_API_KEY}
+    #     chat:
+    #       model: ${CHAT_MODEL:gpt-4o-mini}            
