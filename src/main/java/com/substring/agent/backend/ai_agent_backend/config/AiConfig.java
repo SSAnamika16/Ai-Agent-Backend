@@ -11,6 +11,10 @@ import com.substring.agent.backend.ai_agent_backend.tools.FlightTools;
 import com.substring.agent.backend.ai_agent_backend.tools.WeatherTools;
 import com.substring.agent.backend.ai_agent_backend.tools.HotelTools;
 
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration 
@@ -22,6 +26,18 @@ public class AiConfig {
     private final FlightTools flightTools;
     private final WeatherTools weatherTools;
     private final HotelTools hotelTools;
+
+
+    @Bean 
+    public ChatMemory chatMemory() {
+        return MessageWindowChatMemory
+            .builder()
+            .maxMessages(10)
+            .build();
+    }
+
+
+
 
     @Bean
     public ChatClient chatClient(  ChatClient.Builder builder) {
@@ -40,6 +56,8 @@ public class AiConfig {
         //     4. OrderTools: Use this tool to manage customer orders, including creating, updating, and retrieving order details.
         //     5. InventoryTools: Use this tool to manage product inventory, including checking stock levels and updating product information.
         //     """)
+
+        .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory()).build())
         .defaultTools(tools, inventoryTools, flightTools, weatherTools, hotelTools)
         .build();
     }

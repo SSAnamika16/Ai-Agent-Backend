@@ -7,8 +7,9 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import com.substring.agent.backend.ai_agent_backend.service.ChatService;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -19,10 +20,10 @@ public class ChatController {
 
     private final ChatService chatService;
 
-    @GetMapping
-    public ResponseEntity<String> chat(@RequestBody String message) {
+    @PostMapping
+    public ResponseEntity<String> chat(@RequestHeader("Conversation-Id") String conversationId, @RequestBody String message) {
 
-        return ResponseEntity.ok(chatService.chat(message));
+        return ResponseEntity.ok(chatService.chat(message, conversationId));
 
         // String response = "You said: " + message;
         // return ResponseEntity.ok(response);
